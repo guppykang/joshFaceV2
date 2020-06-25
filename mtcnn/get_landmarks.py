@@ -16,7 +16,7 @@ def computeArea(points ):
 
 parser = argparse.ArgumentParser(description='Mostly to get the facial landmarks for the casia dataset')
 parser.add_argument('--dataset', default='/home/joshuakang/datasets/CASIA-WebFace', type=str)
-parser.add_argument('--output', type=str, default = '../cosFace/data/casia_landmarkMTCNN.txt')
+parser.add_argument('--output', type=str, default = '../cosFace/data/josh_landmarksMTCNN.txt')
 parser.add_argument('--label', type=bool, default=True)
 args = parser.parse_args()
 
@@ -30,7 +30,7 @@ imgs = []
 total_num_faces = 0
 for x in names:
     current_id_images = []
-    current_id_images = sorted(glob.glob(osp.join(x, '*.jpg') ) )
+    current_id_images = sorted(glob.glob(osp.join(x, '*.jpg') ) ) #change this based on the image types that you are processing
     imgs.append(current_id_images)
     total_num_faces += len(current_id_images)
 
@@ -42,9 +42,10 @@ with open(args.output, 'w') as fOut:
             print(f'{cnt}/{total_num_faces}: {image_name}')
             img = Image.open(image_name)
 
+            #for the greyscale images
             if np.asarray(img).ndim == 2:
-                print(f'Warning: SKIPPING because the image is a greyscale{image_name}')
-                continue #I don't want to deal with greyscale images rn.. sorry
+                img = img[:, :, np.newaxis]
+                img = np.concatenate([img, img, img], axis=2)
 
             _, landmarks = detect_faces(img )
             if len(landmarks) == 0: 
