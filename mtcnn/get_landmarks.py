@@ -6,6 +6,11 @@ import os.path as osp
 import numpy as np
 import code
 
+"""
+Given the dataset, computes the largest face in the image's facial landmarks as learned  using MTCNN.
+In addition, this script will label the images and landmarks so that they can be used in the training script.
+"""
+
 
 def computeArea(points ):
     assert(points.shape[0] == 2 and points.shape[1] == 5)
