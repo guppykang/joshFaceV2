@@ -67,7 +67,9 @@ while True:
         aligned_face = (aligned_face.astype(np.float32 ) - 127.5) / 128 #not actually 100% sure why I do this lol
         aligned_face = Variable(torch.from_numpy(aligned_face)).float().cuda()
 
-        pred = net(aligned_face)[0].cpu().data.numpy().squeeze() #aint this line just satisfying
+        pred = net(aligned_face)[0]#.cpu().data.numpy().squeeze() #aint this line just satisfying
+        code.interact(local=locals())
+
         pred_class = np.argmax(pred) 
         print(pred_class)
         if pred_class == 10575: #aka me
