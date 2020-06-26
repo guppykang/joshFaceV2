@@ -1,4 +1,5 @@
 ```bash
+├── live_inference.py '(Live inferencing of the model using laptop camera)'
 ├── cosFace
 │   ├── casia_train.py '(MAIN TRAINING SCRIPT)'
 │   ├── casia_train_summary_CosFace_20200625-115034 '(Tensorboard metrics)'
@@ -39,7 +40,6 @@
 │   ├── faceNet.py '(Models)'
 │   ├── random_10_inference.py '(creates embeddings for random faces. For Tsne visualization mostly)'
 │   ├── lfw_eval.py '(evaluation script on lfw dataset)'
-│   ├── live_inference.py '(Live inferencing of the model using laptop camera)'
 │   ├── matlab_cp2tform.py
 │   ├── plot_graphs.ipynb
 │   └── __pycache__
@@ -70,7 +70,7 @@
 │           └── rnet.npy
 └── README.md
 ```
-No usage of out of the box implementations or usage of opencv (cuz I'm a boss)  
+No usage of out of the box implementations (some changes to mtcnn) or usage of opencv (cuz I'm a boss). Other than cv2 usage for camera accessibility.  
 # MTCNN for facial landmark detection
 [Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks](https://arxiv.org/abs/1604.02878).
 

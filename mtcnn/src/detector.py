@@ -8,7 +8,8 @@ from .first_stage import run_first_stage
 
 def detect_faces(image, min_face_size=20.0,
                  thresholds=[0.6, 0.7, 0.8],
-                 nms_thresholds=[0.7, 0.7, 0.7]):
+                 nms_thresholds=[0.7, 0.7, 0.7], 
+                 live_inference=False):
     """
     Arguments:
         image: an instance of PIL.Image.
@@ -22,10 +23,17 @@ def detect_faces(image, min_face_size=20.0,
     """
 
     # LOAD MODELS
-    pnet = PNet().cuda()
-    rnet = RNet().cuda()
-    onet = ONet().cuda()
-    onet.eval()
+    if not live_inference:
+        pnet = PNet().cuda()
+        rnet = RNet().cuda()
+        onet = ONet().cuda()
+        onet.eval()
+    else: #I'm sorry I don't know how to do this any other way I'm dumb
+        pnet = PNet(saved_weights='./mtcnn/src/weights/pnet.npy').cuda()
+        rnet = RNet(saved_weights='./mtcnn/src/weights/rnet.npy').cuda()
+        onet = ONet(saved_weights='./mtcnn/src/weights/onet.npy').cuda()
+        onet.eval()
+ 
 
     # BUILD AN IMAGE PYRAMID
     width, height = image.size
