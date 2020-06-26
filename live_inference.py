@@ -62,11 +62,14 @@ while True:
     for box_idx, box in enumerate(bounding_boxes):
         cropped_face = frame[int(box[1]) : int(box[3]), int(box[0]) : int(box[2]), :] #maybe add a +/- 10 pixels here in case the bounding boxes are too strict
         aligned_face = alignment(cropped_face, landmarks[box_idx]) #crop and align the face to the preset landmark locations
-        aligned_face = (aligned_face.astype(np.float32 ) - 127.5) / 128 #not actually 100% sure why I do this lol
-        aligned_face = Variable(torch.from_numpy(aligned_face))
+        aligned_face = aligned_face.reshape((1,3,112,96)) 
 
-        pred = net(aligned_face).cpu().data.numpy().squeeze() #aint this line just satisfying
+        aligned_face = (aligned_face.astype(np.float32 ) - 127.5) / 128 #not actually 100% sure why I do this lol
+        aligned_face = Variable(torch.from_numpy(aligned_face)).float().cuda()
+
+        pred = net(aligned_face)[0].cpu().data.numpy().squeeze() #aint this line just satisfying
         pred_class = np.argmax(pred) 
+        print(pred_class)
         if pred_class == 10575: #aka me
             print('me!')
 

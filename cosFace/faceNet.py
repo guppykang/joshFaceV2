@@ -279,7 +279,9 @@ class faceNet_BN(nn.Module):
 
         if self.feature:
             return x
-        x = self.fc5_bn(x)
+
+        if x.shape[0] > 1:
+            x = self.fc5_bn(x)
 
         x = self.fc6(x)
         return x
