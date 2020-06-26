@@ -39,7 +39,7 @@
 │   ├── faceNet.py '(Models)'
 │   ├── random_10_inference.py '(creates embeddings for random faces. For Tsne visualization mostly)'
 │   ├── lfw_eval.py '(evaluation script on lfw dataset)'
-│   ├── live_inference.py '(evaluation script on lfw dataset)'
+│   ├── live_inference.py '(Live inferencing of the model using laptop camera)'
 │   ├── matlab_cp2tform.py
 │   ├── plot_graphs.ipynb
 │   └── __pycache__
