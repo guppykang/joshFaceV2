@@ -1,4 +1,5 @@
-# Results
+# Results 
+Hardware : GTX 1060 took roughly 4.5 hours to complete 28k iterations/7 epochs) p.s : Disk stored dataset was horrible the first epoch due to what I believe to be TLB misses. After the first epoch, disk reads and file i/o buffers helped training go way faster.
 CASIA (training) : ~0.98 training accuracy, ~1.92 Training Loss, 10575(CASIA) + 1(me) classes  
 LFW (evaluation) : 0.9902 accuracy 
 
