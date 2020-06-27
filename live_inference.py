@@ -60,7 +60,7 @@ while True:
     frame = np.ascontiguousarray(frame) #since we changed it to a PIL image, so change back to [H, W, 3]
 
     for box_idx, box in enumerate(bounding_boxes):
-        cropped_face = frame[int(box[1]) - 15 : int(box[3])+ 15, int(box[0]) - 15: int(box[2])+ 15, :] #maybe add a +/- 10 pixels here in case the bounding boxes are too strict
+        cropped_face = frame[int(box[1]) : int(box[3]), int(box[0]): int(box[2]), :] #maybe add a +/- 10 pixels here in case the bounding boxes are too strict
         aligned_face = alignment(cropped_face, landmarks[box_idx]) #crop and align the face to the preset landmark locations
         aligned_face = aligned_face.reshape((1,3,112,96)) 
 
@@ -71,8 +71,7 @@ while True:
         _, pred_label = torch.max(pred.data, 1)
         pred_label = pred_label.data[0]
 
-        print(pred_label)
-        code.interact(local=locals())
+        print(pred_label.data)
         if pred_label == 10575: #aka me
             print('me!')
 

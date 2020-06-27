@@ -70,14 +70,14 @@ def find_best_threshold(thresholds, predicts):
 
 parser = argparse.ArgumentParser(description='PyTorch sphereface lfw')
 parser.add_argument('--net','-n', default='faceNet', type=str)
-parser.add_argument('--lfw', default='../lfw/', type=str)
+parser.add_argument('--lfw', default='/home/joshuakang/datasets/lfw', type=str)
 parser.add_argument('--alignmentMode', type=int, default=1,
         help='0: crop the center region of the image, 1: do alignment use provided landmarks 2: do alignment use predicted landmarks')
-parser.add_argument('--model','-m', default=None, type=str)
+parser.add_argument('--model','-m', default='./checkpoint/netFinal_8.pth', type=str)
 args = parser.parse_args()
 
 predicts=[]
-net = getattr(faceNet, args.net)()
+net = faceNet.faceNet_BN(classnum=10576)
 net.load_state_dict(torch.load(args.model) )
 net.cuda()
 net.eval()
